@@ -1,0 +1,10 @@
+{
+    "resource": "https://www.beekeepersnaturals.com",
+    "authorization_servers": [
+        "https://account.beekeepersnaturals.com",
+        "https://shopify.com/authentication/2905473113"
+    ],
+    "bearer_methods_supported": [
+        "header"
+    ]
+}

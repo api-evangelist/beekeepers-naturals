@@ -1,0 +1,84 @@
+generated: '2026-08-02'
+method: searched
+source: https://www.beekeepersnaturals.com/agents.md
+also_from:
+- https://www.beekeepersnaturals.com/robots.txt
+- https://www.beekeepersnaturals.com/.well-known/ucp
+- https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+authentication:
+  style: 'Two layers. (1) Agent identity: a UCP-Agent profile URI on every MCP request. (2) Buyer identity:
+    OAuth 2.0 authorization code + PKCE against Shopify customer accounts.'
+  artifact: authentication/beekeepers-naturals-authentication.yml
+  anonymous_surface: read-only storefront product and collection JSON
+idempotency:
+  supported: true
+  mechanism: 'An `idempotency-key` (UUID) carried in the JSON-RPC `meta` object, which maps to the HTTP
+    `Idempotency-Key` header.'
+  header: Idempotency-Key
+  json_rpc_field: params.meta["idempotency-key"]
+  format: uuid
+  required_on:
+  - complete_checkout
+  - cancel_checkout
+  - cancel_cart
+  optional_on:
+  - create_checkout
+  - update_checkout
+  - create_cart
+  - update_cart
+  retention: not published
+  evidence: 'The UCP Shopping OpenRPC schema named by this store''s /.well-known/ucp profile defines
+    meta.idempotency-key as "Unique key for retry safety. Maps to HTTP Idempotency-Key header." and lists it
+    in the required set for complete_checkout, cancel_checkout and cancel_cart.'
+  source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+pagination:
+  style: not published for the MCP surface
+  storefront_json: 'Shopify storefront collection JSON supports ?limit= and ?page=, but this store does not
+    document those parameters in its own agent instructions — not recorded as a provider convention.'
+buyer_context:
+  documented_params:
+  - context.address_country
+  - context.currency
+  purpose: accurate pricing and availability
+  source: https://www.beekeepersnaturals.com/agents.md
+human_in_the_loop:
+  rule: 'Checkout requires human approval. Agents must not complete payment without explicit, contemporaneous
+    buyer consent — no scripted form fills, browser automation, or end-to-end agent flows that finalize
+    payment. Agents that cannot obtain contemporaneous approval are told to route through Shop Pay via the
+    Shop skill instead.'
+  enforced_on: [complete_checkout]
+  sources:
+  - https://www.beekeepersnaturals.com/agents.md
+  - https://www.beekeepersnaturals.com/robots.txt
+rate_limiting:
+  documented: true
+  statement: The MCP endpoint is rate-limited per IP. Agents must back off on 429 responses.
+  scope: per IP
+  signal_headers: not published
+  source: https://www.beekeepersnaturals.com/agents.md
+versioning:
+  scheme: date-based protocol version negotiation
+  current: '2026-04-08'
+  supported:
+  - '2026-04-08'
+  - '2026-01-23'
+  discovery: https://www.beekeepersnaturals.com/.well-known/ucp
+  artifact: lifecycle/beekeepers-naturals-lifecycle.yml
+error_envelope:
+  shape: JSON-RPC 2.0 error object with a `data.code` string discriminator and a `data.continue_url`
+  example_fields: [code, message, data.code, data.content, data.continue_url]
+  artifact: errors/beekeepers-naturals-problem-types.yml
+  rfc9457: false
+discovery:
+  entry_points:
+  - /.well-known/ucp
+  - /agents.md
+  - /llms.txt
+  - /robots.txt
+  - /sitemap_agentic_discovery.xml
+cross_links:
+  errors: errors/beekeepers-naturals-problem-types.yml
+  lifecycle: lifecycle/beekeepers-naturals-lifecycle.yml
+  authentication: authentication/beekeepers-naturals-authentication.yml
+  scopes: scopes/beekeepers-naturals-scopes.yml
+  mcp: mcp/beekeepers-naturals-mcp.yml

@@ -1,0 +1,43 @@
+generated: '2026-08-02'
+method: derived
+source: observed responses from https://www.beekeepersnaturals.com/api/ucp/mcp + agents.md
+format: json-rpc-2.0
+note: 'This provider publishes no OpenAPI and no error reference page, so this catalog records only errors
+  that were actually observed on the wire or explicitly documented in the store''s own agent instructions.
+  It is deliberately short — nothing was inferred from the Shopify platform generally.'
+envelope:
+  media_type: application/json
+  shape: |
+    {"jsonrpc":"2.0","id":<id>,"error":{"code":<int>,"message":"<string>",
+     "data":{"code":"<string>","content":"<string>","continue_url":"<url>"}}}
+  discriminator: error.data.code
+  rfc9457: false
+problems:
+- code: -32001
+  data_code: invalid_profile_url
+  http_status: 422
+  title: UCP discovery failed
+  detail: 'Unable to fetch agent profile: Missing profile uri'
+  cause: The request did not carry a resolvable UCP-Agent profile URI.
+  remediation: Publish a UCP profile document for the calling platform and send its URL as the UCP-Agent
+    profile on every MCP request.
+  observed: true
+  source_probe:
+    url: https://www.beekeepersnaturals.com/api/ucp/mcp
+    method: POST
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    fetched: '2026-08-02'
+- http_status: 429
+  title: Rate limited
+  detail: The MCP endpoint is rate-limited per IP.
+  remediation: Back off and retry with exponential delay.
+  observed: false
+  documented: true
+  source: https://www.beekeepersnaturals.com/agents.md
+- http_status: 404
+  title: Not found
+  detail: Storefront returns a themed 404 HTML page for unknown product, collection and well-known paths.
+  observed: true
+  source_probe:
+    url: https://www.beekeepersnaturals.com/.well-known/security.txt
+    fetched: '2026-08-02'

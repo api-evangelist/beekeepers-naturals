@@ -1,0 +1,82 @@
+generated: '2026-08-02'
+method: searched
+source: live probes of https://www.beekeepersnaturals.com/ well-known + agent surfaces
+standards:
+- id: ucp-2026-04-08
+  name: Universal Commerce Protocol, Shopping service
+  conforms: true
+  evidence: /.well-known/ucp advertises version 2026-04-08 (and 2026-01-23) with a dev.ucp.shopping service
+    over the mcp transport
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: live JSON-RPC 2.0 MCP endpoint at /api/ucp/mcp; anonymous calls are rejected with a JSON-RPC
+    error object rather than an HTML page
+- id: openrpc-1.3.2
+  name: OpenRPC
+  conforms: true
+  evidence: the merchant profile names https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json as the
+    schema for its MCP service
+- id: oauth2
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns RFC 8414 metadata with authorization_code and
+    refresh_token grants
+- id: oidc-discovery
+  name: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence: /.well-known/openid-configuration returns an issuer, jwks_uri, RS256 id_token signing and an
+    openid scope
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server → 200 application/json
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: /.well-known/oauth-protected-resource → 200 naming two authorization servers
+- id: rfc7636
+  name: PKCE
+  conforms: true
+  evidence: code_challenge_methods_supported = [S256]
+- id: llmstxt
+  conforms: true
+  evidence: /llms.txt → 200 text/markdown, mirroring the canonical /agents.md
+- id: rfc9116
+  name: security.txt
+  conforms: false
+  evidence: /.well-known/security.txt → 404
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json → 404 on www, account and myshopify
+    hosts
+- id: openapi
+  conforms: false
+  evidence: no OpenAPI or Swagger document found on any host (see x-contract-discovery)
+- id: asyncapi
+  conforms: false
+  evidence: no event, streaming or webhook surface is published by this merchant
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: errors are JSON-RPC 2.0 error objects, not application/problem+json
+- id: rfc8594
+  name: Sunset header
+  conforms: unknown
+  evidence: no deprecation policy published
+x-contract-discovery:
+  fetched: '2026-08-02'
+  hosts_probed:
+  - www.beekeepersnaturals.com
+  - account.beekeepersnaturals.com
+  - beekeepersnaturals.myshopify.com
+  paths_probed:
+  - {path: /openapi.json, status: 404}
+  - {path: /openapi.yaml, status: 404, note: HTML 404 shell}
+  - {path: /swagger.json, status: 404}
+  - {path: /api-docs, status: 404, note: HTML 404 shell}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /api/ucp/mcp, status: 422, note: live MCP, gated on UCP-Agent profile}
+  graphql: 'not probed as a provider surface — the Shopify Storefront GraphQL API is a platform API requiring
+    a merchant-issued access token, not a contract published by Beekeeper''s Naturals'

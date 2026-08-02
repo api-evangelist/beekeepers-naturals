@@ -1,0 +1,123 @@
+generated: '2026-08-02'
+method: searched
+status: published
+source: https://www.beekeepersnaturals.com/.well-known/ucp
+server:
+  name: beekeepers-naturals-ucp-shopping
+  transport: http
+  url: https://www.beekeepersnaturals.com/api/ucp/mcp
+  canonical_url: https://beekeepersnaturals.myshopify.com/api/ucp/mcp
+  protocol: Universal Commerce Protocol (UCP)
+  service: dev.ucp.shopping
+  versions:
+    current: '2026-04-08'
+    supported:
+    - '2026-04-08'
+    - '2026-01-23'
+  schema: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+  spec: https://ucp.dev/2026-04-08/specification/overview/
+  docs: https://www.beekeepersnaturals.com/agents.md
+capabilities:
+- dev.ucp.shopping.catalog.search
+- dev.ucp.shopping.catalog.lookup
+- dev.ucp.shopping.cart
+- dev.ucp.shopping.checkout
+- dev.ucp.shopping.fulfillment
+- dev.ucp.shopping.discount
+- dev.ucp.shopping.order
+- dev.shopify.catalog
+payment_handlers:
+- id: gpay
+  handler: com.google.pay
+  version: '2026-01-11'
+- id: shopify.card
+  handler: dev.shopify.card
+  version: '2026-01-15'
+- id: shop_pay
+  handler: dev.shopify.shop_pay
+  version: '2026-04-08'
+authentication:
+  live_tools_list: gated
+  requirement: 'Every request must carry a UCP-Agent identification with a resolvable `profile` URI (an
+    HTTP UCP-Agent header, mapped to meta["ucp-agent"]["profile"] in the JSON-RPC params). An anonymous
+    tools/list returns JSON-RPC error -32001 "UCP discovery failed" / invalid_profile_url.'
+  note: 'Tool names and input schemas below are NOT guessed — they are taken from the OpenRPC document the
+    store''s own /.well-known/ucp profile names as the schema for its dev.ucp.shopping MCP service. Live,
+    store-specific tool introspection requires a registered UCP agent profile.'
+tools:
+- name: search_catalog
+  description: Search for products in the catalog
+  params: [meta, catalog]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#search_catalog
+- name: lookup_catalog
+  description: Batch lookup products or variants by identifier
+  params: [meta, catalog]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#lookup_catalog
+- name: get_product
+  description: Get product details
+  params: [meta, catalog]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#get_product
+- name: create_cart
+  description: Create a cart
+  params: [meta, cart]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#create_cart
+- name: get_cart
+  description: Get cart
+  params: [meta, id]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#get_cart
+- name: update_cart
+  description: Update cart
+  params: [meta, id, cart]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#update_cart
+- name: cancel_cart
+  description: Cancel cart
+  params: [meta, id]
+  idempotency_key_required: true
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#cancel_cart
+- name: create_checkout
+  description: Create a checkout
+  params: [meta, checkout]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#create_checkout
+- name: get_checkout
+  description: Get checkout
+  params: [meta, id]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#get_checkout
+- name: update_checkout
+  description: Update checkout
+  params: [meta, id, checkout]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#update_checkout
+- name: complete_checkout
+  description: Complete checkout and place order — requires explicit, contemporaneous buyer approval
+  params: [meta, id, checkout]
+  idempotency_key_required: true
+  human_in_the_loop: required
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#complete_checkout
+- name: cancel_checkout
+  description: Cancel checkout
+  params: [meta, id]
+  idempotency_key_required: true
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#cancel_checkout
+- name: get_order
+  description: Get order
+  params: [meta, id]
+  schema_source: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json#get_order
+related_skills:
+- name: Shop skill
+  url: https://shop.app/SKILL.md
+  note: recommended by this store's /agents.md for personal shopping assistants; published by Shopify, not
+    by Beekeeper's Naturals
+x-evidence:
+- fetched: '2026-08-02'
+  url: https://www.beekeepersnaturals.com/.well-known/ucp
+  http_status: 200
+  content_type: application/json
+- fetched: '2026-08-02'
+  url: https://www.beekeepersnaturals.com/api/ucp/mcp
+  method: POST tools/list (anonymous)
+  http_status: 422
+  body: 'jsonrpc error -32001 UCP discovery failed / invalid_profile_url: Missing profile uri'
+- fetched: '2026-08-02'
+  url: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+  http_status: 200
+  note: OpenRPC 1.3.2, "UCP Shopping Service" v2026-04-08, 13 methods — the schema named by this store's
+    merchant profile

@@ -1,0 +1,70 @@
+generated: '2026-08-02'
+method: searched
+source: https://www.beekeepersnaturals.com/.well-known/openid-configuration
+docs: https://www.beekeepersnaturals.com/agents.md
+note: 'No OpenAPI exists for this provider, so this profile is built from live discovery documents fetched
+  from the store''s own hosts, not derived from a spec.'
+summary:
+  types:
+  - openIdConnect
+  - oauth2
+  - none
+  oauth2_flows:
+  - authorizationCode
+  pkce: S256
+  api_key_in: []
+schemes:
+- name: shopify-customer-accounts
+  type: openIdConnect
+  openIdConnectUrl: https://www.beekeepersnaturals.com/.well-known/openid-configuration
+  issuer: https://shopify.com/authentication/2905473113
+  authorizationUrl: https://account.beekeepersnaturals.com/authentication/oauth/authorize
+  tokenUrl: https://account.beekeepersnaturals.com/authentication/oauth/token
+  endSessionUrl: https://account.beekeepersnaturals.com/authentication/logout
+  jwksUri: https://account.beekeepersnaturals.com/authentication/.well-known/jwks.json
+  responseTypes: [code]
+  grantTypes:
+  - authorization_code
+  - refresh_token
+  - 'urn:ietf:params:oauth:grant-type:jwt-bearer'
+  tokenEndpointAuthMethods: [client_secret_basic]
+  codeChallengeMethods: [S256]
+  idTokenSigningAlgs: [RS256]
+  scopes:
+  - openid
+  - email
+  - customer-account-api:full
+  - customer-account-mcp-api:full
+  sources:
+  - well-known/beekeepers-naturals-openid-configuration.json
+  - well-known/beekeepers-naturals-oauth-authorization-server.json
+- name: ucp-agent-profile
+  type: agentIdentity
+  in: header
+  parameter: UCP-Agent
+  json_rpc_path: params.meta["ucp-agent"].profile
+  description: 'Every call to the UCP Shopping MCP endpoint must identify the calling platform with a
+    resolvable URI pointing at that platform''s UCP profile document. This is agent identification, not
+    buyer authentication — an anonymous call is rejected with JSON-RPC -32001 / invalid_profile_url.'
+  required: true
+  sources:
+  - https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+  - mcp/beekeepers-naturals-mcp.yml
+- name: storefront-public
+  type: none
+  description: Read-only storefront product and collection JSON requires no authentication.
+  sources:
+  - https://www.beekeepersnaturals.com/agents.md
+protected_resource:
+  resource: https://www.beekeepersnaturals.com
+  authorization_servers:
+  - https://account.beekeepersnaturals.com
+  - https://shopify.com/authentication/2905473113
+  bearer_methods_supported: [header]
+  source: well-known/beekeepers-naturals-oauth-protected-resource.json
+x-evidence:
+  fetched: '2026-08-02'
+  urls:
+  - {url: 'https://www.beekeepersnaturals.com/.well-known/openid-configuration', http_status: 200}
+  - {url: 'https://www.beekeepersnaturals.com/.well-known/oauth-authorization-server', http_status: 200}
+  - {url: 'https://www.beekeepersnaturals.com/.well-known/oauth-protected-resource', http_status: 200}

@@ -1,0 +1,33 @@
+generated: '2026-08-02'
+method: searched
+source: https://www.beekeepersnaturals.com/agents.md
+skills:
+- file: beekeepers-naturals-agents.md
+  name: Agent Instructions — Beekeeper's Naturals
+  description: The store's own canonical agent-facing operating instructions — how to discover the UCP
+    merchant profile, which MCP tools to call for search/cart/checkout, the buyer-approval invariant, rate
+    limits, and the read-only storefront JSON endpoints.
+  method: searched
+  source: https://www.beekeepersnaturals.com/agents.md
+  mirrored_at: https://www.beekeepersnaturals.com/llms.txt
+  api: mcp/beekeepers-naturals-mcp.yml
+  operations:
+  - search_catalog
+  - create_cart
+  - create_checkout
+  - update_checkout
+  - complete_checkout
+  verbatim: true
+- file: beekeepers-naturals-buy-a-product.md
+  name: Buy a product with buyer approval
+  description: Generated operating instructions for an agent completing a purchase against the Beekeeper's
+    Naturals UCP Shopping MCP endpoint, grounded in the real tool names and the store's own rules.
+  method: generated
+  api: mcp/beekeepers-naturals-mcp.yml
+  operations:
+  - search_catalog
+  - get_product
+  - create_cart
+  - create_checkout
+  - update_checkout
+  - complete_checkout

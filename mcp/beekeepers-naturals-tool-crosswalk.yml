@@ -1,0 +1,91 @@
+generated: '2026-08-02'
+method: derived
+source: mcp/beekeepers-naturals-mcp.yml + llms/beekeepers-naturals-llms.txt
+note: 'This provider publishes no OpenAPI. The REST side of this crosswalk is the read-only storefront JSON
+  surface that the store''s own /agents.md and /llms.txt document, so bindings name documented endpoint paths
+  rather than OpenAPI operationIds — confidence is set accordingly. No operation, tool or field below was
+  invented; every row is either in the UCP Shopping OpenRPC schema named by /.well-known/ucp or in the
+  store''s own agent instructions.'
+surfaces:
+  openapi: null
+  openrpc:
+    url: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+    gated: false
+    note: canonical UCP Shopping method list; endpoint URL comes from the merchant profile
+  mcp:
+    url: https://www.beekeepersnaturals.com/api/ucp/mcp
+    gated: true
+    note: anonymous tools/list returns -32001 invalid_profile_url; a UCP-Agent profile URI is required
+  rest:
+    base: https://www.beekeepersnaturals.com
+    documented_in: https://www.beekeepersnaturals.com/agents.md
+    gated: false
+  graphql: null
+crosswalk:
+- tool: search_catalog
+  category: catalog
+  rest:
+  - GET /search?q={query}&type=product
+  binding: storefront-html-json
+  confidence: medium
+  note: docs list the storefront search endpoint as the read-only equivalent; it returns HTML for the
+    default view, not JSON
+- tool: lookup_catalog
+  category: catalog
+  rest:
+  - GET /collections/{handle}/products.json
+  binding: storefront-json
+  confidence: medium
+  note: batch identifier lookup has no exact read-only twin; collection product JSON is the closest
+    documented bulk read
+- tool: get_product
+  category: catalog
+  rest:
+  - GET /products/{handle}.json
+  binding: storefront-json
+  confidence: high
+  note: verified 200 application/json for /products/throat-soother.json
+mcp_only:
+- tool: create_cart
+  reason: no public read-only REST equivalent; /cart.js is explicitly disallowed in robots.txt with the
+    instruction that agents use UCP/MCP instead
+- tool: get_cart
+  reason: same as create_cart
+- tool: update_cart
+  reason: same as create_cart
+- tool: cancel_cart
+  reason: same as create_cart; requires an idempotency-key
+- tool: create_checkout
+  reason: checkout is transactional; robots.txt disallows /checkout and forbids scripted checkout flows
+- tool: get_checkout
+  reason: transactional surface, MCP only
+- tool: update_checkout
+  reason: transactional surface, MCP only
+- tool: complete_checkout
+  reason: transactional; requires an idempotency-key and explicit contemporaneous buyer approval
+- tool: cancel_checkout
+  reason: transactional; requires an idempotency-key
+- tool: get_order
+  reason: /orders is disallowed to crawlers; order retrieval is authenticated and MCP/customer-account only
+rest_only:
+- capability: collection browsing
+  endpoints:
+  - GET /collections/all
+  - GET /collections/{handle}
+  note: HTML browsing surfaces with no MCP tool equivalent
+- capability: sitemaps
+  endpoints:
+  - GET /sitemap.xml
+  - GET /sitemap_agentic_discovery.xml
+- capability: store policies
+  endpoints:
+  - GET /policies/privacy-policy
+  - GET /policies/terms-of-service
+  - GET /policies/refund-policy
+  - GET /policies/shipping-policy
+coverage:
+  tools_named: 13
+  tools_bound_to_rest: 3
+  mcp_only: 10
+  rest_documented_endpoints: 6
+  rest_endpoints_with_a_tool: 3

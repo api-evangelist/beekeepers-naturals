@@ -1,0 +1,37 @@
+generated: '2026-08-02'
+method: searched
+source: https://www.beekeepersnaturals.com/.well-known/openid-configuration
+note: 'Derived from the live OIDC/OAuth discovery documents served on the store''s own host (there is no
+  OpenAPI for this provider). Scope descriptions are the Shopify customer-account meanings of the advertised
+  scope strings; only the four scopes the store actually advertises are listed.'
+schemes:
+- name: shopify-customer-accounts
+  source: well-known/beekeepers-naturals-openid-configuration.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://account.beekeepersnaturals.com/authentication/oauth/authorize
+    tokenUrl: https://account.beekeepersnaturals.com/authentication/oauth/token
+    pkce: S256
+scopes:
+- scope: openid
+  description: Issue an OpenID Connect ID token identifying the signed-in customer.
+  flows: [authorizationCode]
+  sources: [well-known/beekeepers-naturals-openid-configuration.json]
+- scope: email
+  description: Release the customer's email address and email_verified claim.
+  flows: [authorizationCode]
+  sources: [well-known/beekeepers-naturals-openid-configuration.json]
+- scope: customer-account-api:full
+  description: Full access to the authenticated customer's account data — profile, addresses, orders and
+    subscriptions — through the Shopify Customer Account API.
+  flows: [authorizationCode]
+  sources: [well-known/beekeepers-naturals-openid-configuration.json]
+- scope: customer-account-mcp-api:full
+  description: Full access to the authenticated customer's account through the MCP-shaped customer account
+    surface, for agents acting on the buyer's behalf.
+  flows: [authorizationCode]
+  sources: [well-known/beekeepers-naturals-openid-configuration.json]
+x-evidence:
+  fetched: '2026-08-02'
+  url: https://www.beekeepersnaturals.com/.well-known/openid-configuration
+  http_status: 200

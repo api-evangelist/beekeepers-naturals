@@ -1,0 +1,37 @@
+generated: '2026-08-02'
+method: searched
+source: https://www.beekeepersnaturals.com/.well-known/ucp
+versioning:
+  scheme: date-based protocol version negotiation (UCP)
+  current: '2026-04-08'
+  supported:
+  - version: '2026-04-08'
+    profile: https://beekeepersnaturals.myshopify.com/.well-known/ucp/2026-04-08
+    status: latest stable
+  - version: '2026-01-23'
+    profile: https://beekeepersnaturals.myshopify.com/.well-known/ucp/2026-01-23
+    status: supported
+  docs: https://www.beekeepersnaturals.com/agents.md
+  discovery: https://www.beekeepersnaturals.com/.well-known/ucp
+  note: 'The store advertises exactly two supported protocol versions and resolves each to its own versioned
+    profile document, so version negotiation is machine-readable even though no prose policy is published.'
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: No deprecation or sunset policy is published by this merchant. Older UCP versions simply drop out of
+    the supported_versions map in /.well-known/ucp.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  provider_operated: null
+  note: 'Beekeeper''s Naturals operates no status page of its own (status.beekeepersnaturals.com does not
+    resolve). The storefront and its UCP/MCP endpoint run on Shopify, whose platform status page is
+    https://www.shopifystatus.com/ — recorded as a dependency, not claimed as this provider''s status page.'
+  platform_dependency: https://www.shopifystatus.com/
+deprecated_operations: []
+x-evidence:
+  fetched: '2026-08-02'
+  urls:
+  - {url: 'https://www.beekeepersnaturals.com/.well-known/ucp', http_status: 200}
+  - {url: 'https://status.beekeepersnaturals.com/', http_status: 0, note: DNS does not resolve}

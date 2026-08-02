@@ -1,0 +1,65 @@
+generated: '2026-08-02'
+method: searched
+source: https://www.beekeepersnaturals.com/.well-known/
+host: https://www.beekeepersnaturals.com
+documents:
+- path: /.well-known/ucp
+  description: Universal Commerce Protocol merchant profile — supported versions, service endpoints
+    (dev.ucp.shopping over MCP), capabilities (cart, checkout, fulfillment, discount, order, catalog
+    search/lookup) and payment handlers (Google Pay, Shopify card, Shop Pay).
+  status: 200
+  content_type: application/json
+  file: beekeepers-naturals-ucp.json
+- path: /.well-known/openid-configuration
+  description: OpenID Connect discovery for Shopify customer accounts on this store.
+  status: 200
+  content_type: application/json
+  file: beekeepers-naturals-openid-configuration.json
+- path: /.well-known/oauth-authorization-server
+  description: RFC 8414 OAuth 2.0 authorization server metadata (identical payload to the OIDC discovery
+    document on this host).
+  status: 200
+  content_type: application/json
+  file: beekeepers-naturals-oauth-authorization-server.json
+- path: /.well-known/oauth-protected-resource
+  description: RFC 9728 OAuth 2.0 protected resource metadata naming account.beekeepersnaturals.com and
+    shopify.com/authentication/2905473113 as the authorization servers.
+  status: 200
+  content_type: application/json
+  file: beekeepers-naturals-oauth-protected-resource.json
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
+- path: /.well-known/agent-card.json
+  status: 404
+- path: /.well-known/agent.json
+  status: 404
+other_discovery:
+- path: /llms.txt
+  status: 200
+  content_type: text/markdown
+  file: ../llms/beekeepers-naturals-llms.txt
+- path: /agents.md
+  status: 200
+  content_type: text/markdown
+  file: ../skills/beekeepers-naturals-agents.md
+  note: canonical agent-facing description of the store; /llms.txt mirrors it
+- path: /robots.txt
+  status: 200
+  content_type: text/plain
+  file: beekeepers-naturals-robots.txt
+  note: carries agent instructions, the UCP discovery and UCP/MCP endpoint URLs, and an explicit
+    no-autonomous-checkout rule
+- path: /sitemap_agentic_discovery.xml
+  status: 200
+  content_type: application/xml
+  note: dedicated agentic-discovery sitemap listing /agents.md
+x-evidence:
+  fetched: '2026-08-02'
+  hosts_probed:
+  - www.beekeepersnaturals.com
+  - account.beekeepersnaturals.com
+  - beekeepersnaturals.myshopify.com
