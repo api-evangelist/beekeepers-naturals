@@ -27,6 +27,17 @@ tags:
 - Shopify
 - Agentic Commerce
 - Universal Commerce Protocol
+- MCP
+tags_raw:
+- Company
+- Retail
+- E-Commerce
+- Consumer Packaged Goods
+- Health and Wellness
+- Supplements
+- Shopify
+- Agentic Commerce
+- Universal Commerce Protocol
 - Model Context Protocol
 apis:
 - aid: beekeepers-naturals-ucp-shopping-mcp
@@ -58,6 +69,10 @@ apis:
   humanURL: https://www.beekeepersnaturals.com/collections/all
   baseURL: https://www.beekeepersnaturals.com
   tags:
+  - Catalog
+  - Product
+  - E-Commerce
+  tags_raw:
   - Catalog
   - Products
   - E-Commerce
