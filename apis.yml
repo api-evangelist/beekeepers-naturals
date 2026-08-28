@@ -9,6 +9,17 @@ description: 'Beekeeper''s Naturals is a direct-to-consumer bee-derived wellness
   instruction document at /agents.md mirrored to /llms.txt, an agentic-discovery sitemap, OIDC/OAuth discovery
   for Shopify customer accounts, and read-only storefront product/collection JSON endpoints.'
 url: https://raw.githubusercontent.com/api-evangelist/beekeepers-naturals/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.beekeepersnaturals.com/cdn/shop/files/BestSeller-1200x630.webp?v=1776441784
 x-type: company
 x-source: harvest:secondary-market
