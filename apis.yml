@@ -1,13 +1,14 @@
 aid: beekeepers-naturals
 name: Beekeeper's Naturals
-description: 'Beekeeper''s Naturals is a direct-to-consumer bee-derived wellness and supplement brand founded
-  in 2017 by Carly Stein Kremer, selling propolis throat sprays, B.LXR royal-jelly brain fuel, superfood honey,
-  bee pollen and kids'' immunity products through beekeepersnaturals.com and retail partners. The company has no
-  traditional developer program, but its Shopify-hosted storefront publishes a genuine machine-readable agent
-  surface: a Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, a live MCP endpoint at
-  /api/ucp/mcp implementing the UCP Shopping service (catalog search, cart, checkout, order), an agent
-  instruction document at /agents.md mirrored to /llms.txt, an agentic-discovery sitemap, OIDC/OAuth discovery
-  for Shopify customer accounts, and read-only storefront product/collection JSON endpoints.'
+description: 'Beekeeper''s Naturals is a direct-to-consumer bee-derived wellness and supplement brand
+  founded in 2017 by Carly Stein Kremer, selling propolis throat sprays, B.LXR royal-jelly brain fuel,
+  superfood honey, bee pollen and kids'' immunity products through beekeepersnaturals.com and retail partners.
+  The company has no traditional developer program, but its Shopify-hosted storefront publishes a genuine
+  machine-readable agent surface: a Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp,
+  a live MCP endpoint at /api/ucp/mcp implementing the UCP Shopping service (catalog search, cart, checkout,
+  order), an agent instruction document at /agents.md mirrored to /llms.txt, an agentic-discovery sitemap,
+  OIDC/OAuth discovery for Shopify customer accounts, and read-only storefront product/collection JSON
+  endpoints.'
 url: https://raw.githubusercontent.com/api-evangelist/beekeepers-naturals/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -65,14 +66,14 @@ tags_raw:
 - Universal Commerce Protocol
 - Model Context Protocol
 apis:
-- aid: beekeepers-naturals-ucp-shopping-mcp
+- aid: beekeepers-naturals:beekeepers-naturals-ucp-shopping-mcp
   name: Beekeeper's Naturals UCP Shopping MCP API
-  description: 'Agent-facing commerce API for the Beekeeper''s Naturals storefront, exposed over the Model
-    Context Protocol as the Universal Commerce Protocol (UCP) Shopping service. The endpoint is advertised by
-    the store''s own /.well-known/ucp merchant profile and /agents.md, and implements catalog search and
-    lookup, cart create/get/update/cancel, checkout create/get/update/complete/cancel, and order retrieval.
+  description: Agent-facing commerce API for the Beekeeper's Naturals storefront, exposed over the Model
+    Context Protocol as the Universal Commerce Protocol (UCP) Shopping service. The endpoint is advertised
+    by the store's own /.well-known/ucp merchant profile and /agents.md, and implements catalog search
+    and lookup, cart create/get/update/cancel, checkout create/get/update/complete/cancel, and order retrieval.
     Requests must carry a UCP-Agent profile; checkout completion requires explicit contemporaneous buyer
-    approval and an idempotency key.'
+    approval and an idempotency key.
   humanURL: https://www.beekeepersnaturals.com/agents.md
   baseURL: https://www.beekeepersnaturals.com/api/ucp/mcp
   tags:
@@ -85,12 +86,12 @@ apis:
     url: mcp/beekeepers-naturals-mcp.yml
   - type: ToolCrosswalk
     url: mcp/beekeepers-naturals-tool-crosswalk.yml
-- aid: beekeepers-naturals-storefront-json
+- aid: beekeepers-naturals:beekeepers-naturals-storefront-json
   name: Beekeeper's Naturals Storefront Product JSON
-  description: 'Read-only JSON representations of the Beekeeper''s Naturals storefront catalog, documented by
-    the store''s own agent instructions: product detail at /products/{handle}.json and collection listings at
-    /collections/{handle}/products.json. No authentication is required. Shopify''s standard storefront JSON
-    surface, published by this merchant for agents that only need to read catalog data without transacting.'
+  description: 'Read-only JSON representations of the Beekeeper''s Naturals storefront catalog, documented
+    by the store''s own agent instructions: product detail at /products/{handle}.json and collection listings
+    at /collections/{handle}/products.json. No authentication is required. Shopify''s standard storefront
+    JSON surface, published by this merchant for agents that only need to read catalog data without transacting.'
   humanURL: https://www.beekeepersnaturals.com/collections/all
   baseURL: https://www.beekeepersnaturals.com
   tags:
