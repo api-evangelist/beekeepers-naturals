@@ -2,41 +2,6 @@ generated: '2026-08-02'
 method: searched
 source: https://www.beekeepersnaturals.com/.well-known/
 host: https://www.beekeepersnaturals.com
-documents:
-- path: /.well-known/ucp
-  description: Universal Commerce Protocol merchant profile — supported versions, service endpoints
-    (dev.ucp.shopping over MCP), capabilities (cart, checkout, fulfillment, discount, order, catalog
-    search/lookup) and payment handlers (Google Pay, Shopify card, Shop Pay).
-  status: 200
-  content_type: application/json
-  file: beekeepers-naturals-ucp.json
-- path: /.well-known/openid-configuration
-  description: OpenID Connect discovery for Shopify customer accounts on this store.
-  status: 200
-  content_type: application/json
-  file: beekeepers-naturals-openid-configuration.json
-- path: /.well-known/oauth-authorization-server
-  description: RFC 8414 OAuth 2.0 authorization server metadata (identical payload to the OIDC discovery
-    document on this host).
-  status: 200
-  content_type: application/json
-  file: beekeepers-naturals-oauth-authorization-server.json
-- path: /.well-known/oauth-protected-resource
-  description: RFC 9728 OAuth 2.0 protected resource metadata naming account.beekeepersnaturals.com and
-    shopify.com/authentication/2905473113 as the authorization servers.
-  status: 200
-  content_type: application/json
-  file: beekeepers-naturals-oauth-protected-resource.json
-- path: /.well-known/security.txt
-  status: 404
-- path: /.well-known/api-catalog
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
-- path: /.well-known/agent-card.json
-  status: 404
-- path: /.well-known/agent.json
-  status: 404
 other_discovery:
 - path: /llms.txt
   status: 200
@@ -51,8 +16,8 @@ other_discovery:
   status: 200
   content_type: text/plain
   file: beekeepers-naturals-robots.txt
-  note: carries agent instructions, the UCP discovery and UCP/MCP endpoint URLs, and an explicit
-    no-autonomous-checkout rule
+  note: carries agent instructions, the UCP discovery and UCP/MCP endpoint URLs, and an explicit no-autonomous-checkout
+    rule
 - path: /sitemap_agentic_discovery.xml
   status: 200
   content_type: application/xml
@@ -63,3 +28,37 @@ x-evidence:
   - www.beekeepersnaturals.com
   - account.beekeepersnaturals.com
   - beekeepersnaturals.myshopify.com
+hosts:
+- host: https://www.beekeepersnaturals.com
+  documents:
+  - path: /.well-known/ucp
+    status: 200
+    file: beekeepers-naturals-ucp.json
+    content_type: application/json
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: beekeepers-naturals-openid-configuration.json
+    content_type: application/json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: beekeepers-naturals-oauth-authorization-server.json
+    content_type: application/json
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: beekeepers-naturals-oauth-protected-resource.json
+    content_type: application/json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.
