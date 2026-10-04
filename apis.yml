@@ -86,6 +86,9 @@ apis:
     url: mcp/beekeepers-naturals-mcp.yml
   - type: ToolCrosswalk
     url: mcp/beekeepers-naturals-tool-crosswalk.yml
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: ucp
 - aid: beekeepers-naturals:beekeepers-naturals-storefront-json
   name: Beekeeper's Naturals Storefront Product JSON
   description: 'Read-only JSON representations of the Beekeeper''s Naturals storefront catalog, documented
@@ -93,7 +96,6 @@ apis:
     at /collections/{handle}/products.json. No authentication is required. Shopify''s standard storefront
     JSON surface, published by this merchant for agents that only need to read catalog data without transacting.'
   humanURL: https://www.beekeepersnaturals.com/collections/all
-  baseURL: https://www.beekeepersnaturals.com
   tags:
   - Catalog
   - Product
@@ -102,6 +104,9 @@ apis:
   - Catalog
   - Products
   - E-Commerce
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: storefront-json
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
