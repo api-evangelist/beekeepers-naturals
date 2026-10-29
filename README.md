@@ -64,16 +64,106 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Beekeeper's Naturals is a direct-to-consumer bee-derived wellness and supplement brand founded in 2017 by
-Carly Stein Kremer — propolis throat sprays, B.LXR royal-jelly brain fuel, superfood honey, bee pollen and
-kids' immunity products.
+Beekeeper's Naturals is a direct-to-consumer bee-derived wellness and supplement brand founded in 2017 by Carly Stein Kremer, selling propolis throat sprays, B.LXR royal-jelly brain fuel, superfood honey, bee pollen and kids' immunity products through beekeepersnaturals.com and retail partners. The company has no traditional developer program, but its Shopify-hosted storefront publishes a genuine machine-readable agent surface: a Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, a live MCP endpoint at /api/ucp/mcp implementing the UCP Shopping service (catalog search, cart, checkout, order), an agent instruction document at /agents.md mirrored to /llms.txt, an agentic-discovery sitemap, OIDC/OAuth discovery for Shopify customer accounts, and read-only storefront product/collection JSON endpoints.
 
-- Website: https://www.beekeepersnaturals.com/
-- Agent instructions: https://www.beekeepersnaturals.com/agents.md (mirrored at `/llms.txt`)
-- UCP discovery: https://www.beekeepersnaturals.com/.well-known/ucp
-- UCP/MCP endpoint: https://www.beekeepersnaturals.com/api/ucp/mcp
+**Areas:** Company · Retail · E-Commerce · Consumer Packaged Goods · Health and Wellness · Supplements · Shopify · Agentic Commerce · Universal Commerce Protocol · MCP
 
-There is no traditional developer program and no OpenAPI. The machine-readable surface is agentic commerce:
-a Universal Commerce Protocol merchant profile, a live MCP endpoint implementing the UCP Shopping service
-(catalog, cart, checkout, order), OIDC/OAuth discovery for Shopify customer accounts, and read-only
-storefront product JSON.
+## Beekeeper's Naturals on APIs.io
+
+Everything profiled for Beekeeper's Naturals is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/beekeepers-naturals/](https://apis.io/providers/beekeepers-naturals/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Beekeeper's Naturals UCP Shopping MCP API](https://apis.io/apis/beekeepers-naturals/beekeepers-naturals-ucp-shopping-mcp/) — Agent-facing commerce API for the Beekeeper's Naturals storefront, exposed over the Model Context Protocol as the Universal Commerce Protocol (UCP) Shopping…
+- [Beekeeper's Naturals Storefront Product JSON](https://apis.io/apis/beekeepers-naturals/beekeepers-naturals-storefront-json/) — Read-only JSON representations of the Beekeeper's Naturals storefront catalog, documented by the store's own agent instructions: product detail at…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [beekeepers-naturals-ucp-shopping](https://apis.io/servers/beekeepers-naturals/beekeepers-naturals-ucp-shopping/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Beekeepers Naturals Authentication](https://apis.io/security/beekeepers-naturals/beekeepers-naturals-authentication/)
+- [Beekeepers Naturals Domain Security](https://apis.io/security/beekeepers-naturals/beekeepers-naturals-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Beekeepers Naturals Scopes](https://apis.io/scopes/beekeepers-naturals/beekeepers-naturals-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.beekeepersnaturals.com/)
+- [Documentation](https://www.beekeepersnaturals.com/agents.md)
+- [Getting started](https://www.beekeepersnaturals.com/agents.md)
+- [API reference](https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json)
+- [Pricing](https://www.beekeepersnaturals.com/collections/all)
+- [Sign up](https://www.beekeepersnaturals.com/account/login)
+- [Support](https://help.beekeepersnaturals.com/en-US)
+- [Blog](https://www.beekeepersnaturals.com/blogs/blog)
+- [Terms of service](https://www.beekeepersnaturals.com/policies/terms-of-service)
+- [Privacy policy](https://www.beekeepersnaturals.com/policies/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 33.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.7 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 44.7 |
+
+**Agent readiness 25.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | platform (partial credit) |
+
+**Regulatory alignment 32.8** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/beekeepers-naturals/](https://apis.io/providers/beekeepers-naturals/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Beekeeper's Naturals: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/beekeepers-naturals/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
